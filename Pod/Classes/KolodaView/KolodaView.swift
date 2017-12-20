@@ -356,14 +356,25 @@ open class KolodaView: UIView, DraggableCardDelegate {
     // MARK: Actions
     private func swipedAction(_ direction: SwipeResultDirection) {
         animating = true
-        visibleCards.removeFirst()
-        
-        currentCardIndex += 1
-        let shownCardsCount = currentCardIndex + countOfVisibleCards
-        if shownCardsCount - 1 < countOfCards {
+        if(direction == .left){
+            self.sendSubview(toBack: visibleCards.first!)
+            visibleCards.removeFirst()
+            currentCardIndex += 1
+            currentCardIndex = currentCardIndex%countOfCards
             loadNextCard()
         }
+        else{
+            revertAction()
+        }
         
+        
+        
+        
+//        let shownCardsCount = currentCardIndex + countOfVisibleCards
+//        if shownCardsCount - 1 < countOfCards {
+        
+//        }
+        if(direction == .left){
         if !visibleCards.isEmpty {
             animateCardsAfterLoadingWithCompletion { [weak self] in
                 guard let _self = self else {
@@ -379,6 +390,8 @@ open class KolodaView: UIView, DraggableCardDelegate {
             animating = false
             delegate?.koloda(self, didSwipeCardAt: self.currentCardIndex - 1, in: direction)
             delegate?.kolodaDidRunOutOfCards(self)
+            }
+            
         }
     }
     
@@ -388,7 +401,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
         
         let cardParameters = backgroundCardParametersForFrame(frameForCard(at: visibleCards.count))
-        let lastCard = createCard(at: currentCardIndex + countOfVisibleCards - 1, frame: cardParameters.frame)
+        let lastCard = createCard(at: (currentCardIndex + countOfVisibleCards - 1)%countOfCards, frame: cardParameters.frame)
         
         let scale = cardParameters.scale
         lastCard.layer.transform = CATransform3DScale(CATransform3DIdentity, scale.width, scale.height, 1)
@@ -437,17 +450,19 @@ open class KolodaView: UIView, DraggableCardDelegate {
     }
     
     public func revertAction() {
-        guard currentCardIndex > 0 && !animating else {
-          return
-        }
-        if countOfCards - currentCardIndex >= countOfVisibleCards {
+//        guard /* currentCardIndex > 0 && */ !animating else {
+//          return
+//        }
+        if true {//countOfCards - currentCardIndex >= countOfVisibleCards {
             if let lastCard = visibleCards.last {
                 lastCard.removeFromSuperview()
                 visibleCards.removeLast()
             }
         }
         currentCardIndex -= 1
-        
+        if currentCardIndex == -1{
+            currentCardIndex = countOfCards-1
+        }
         if dataSource != nil {
             let firstCardView = createCard(at: currentCardIndex, frame: frameForTopCard())
             

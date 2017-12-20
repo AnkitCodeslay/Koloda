@@ -267,7 +267,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             
         default:
             layer.shouldRasterize = false
-            resetViewPositionAndTransformations()
+            resetViewPositionAndTransformations(isRemove: false)
         }
     }
     
@@ -339,7 +339,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         if let dragDirection = dragDirection , shouldSwipe(dragDirection) && dragPercentage >= swipePercentageMargin && directions.contains(dragDirection) {
             swipeAction(dragDirection)
         } else {
-            resetViewPositionAndTransformations()
+            resetViewPositionAndTransformations(isRemove: false)
         }
     }
     
@@ -363,12 +363,18 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         translationAnimation?.fromValue = NSValue(cgPoint: POPLayerGetTranslationXY(layer))
         translationAnimation?.toValue = NSValue(cgPoint: animationPointForDirection(direction))
         translationAnimation?.completionBlock = { _, _ in
-            self.removeFromSuperview()
+//            self.removeFromSuperview()
+            if(direction == .left){
+                self.resetViewPositionAndTransformations(isRemove: true)
+            }
+            else{
+                self.resetViewPositionAndTransformations(isRemove: false)
+            }
         }
         layer.pop_add(translationAnimation, forKey: "swipeTranslationAnimation")
     }
     
-    private func resetViewPositionAndTransformations() {
+    private func resetViewPositionAndTransformations(isRemove:Bool) {
         delegate?.card(cardWasReset: self)
         
         removeAnimations()
@@ -382,6 +388,9 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             (_, _) in
             self.layer.transform = CATransform3DIdentity
             self.dragBegin = false
+            if(isRemove){
+                self.removeFromSuperview()
+            }
         }
         
         layer.pop_add(resetPositionAnimation, forKey: "resetPositionAnimation")

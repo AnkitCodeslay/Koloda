@@ -9,7 +9,7 @@
 import UIKit
 import Koloda
 
-private var numberOfCards: Int = 5
+private var numberOfCards: Int = 4
 
 class ViewController: UIViewController {
     
