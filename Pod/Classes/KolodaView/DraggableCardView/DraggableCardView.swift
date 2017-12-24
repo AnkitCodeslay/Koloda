@@ -27,6 +27,7 @@ protocol DraggableCardDelegate: class {
     func card(cardAllowedDirections card: DraggableCardView) -> [SwipeResultDirection]
     func card(cardShouldDrag card: DraggableCardView) -> Bool
     func card(cardSwipeSpeed card: DraggableCardView) -> DragSpeed
+    func card(rightSwipeAnimationCompleted card: DraggableCardView)
 }
 
 //Drag animation constants
@@ -40,7 +41,7 @@ private let screenSize = UIScreen.main.bounds.size
 private let cardResetAnimationSpringBounciness: CGFloat = 10.0
 private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
-private let cardResetAnimationDuration: TimeInterval = 0.2
+private let cardResetAnimationDuration: TimeInterval = 0
 internal var cardSwipeActionAnimationDuration: TimeInterval = DragSpeed.default.rawValue
 
 public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
@@ -327,9 +328,9 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     
     
     private func updateOverlayWithFinishPercent(_ percent: CGFloat, direction: SwipeResultDirection?) {
-        overlayView?.overlayState = direction
-        let progress = max(min(percent/swipePercentageMargin, 1.0), 0)
-        overlayView?.update(progress: progress)
+//        overlayView?.overlayState = direction
+//        let progress = max(min(percent/swipePercentageMargin, 1.0), 0)
+//        overlayView?.update(progress: progress)
     }
     
     private func swipeMadeAction() {
@@ -355,8 +356,8 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     }
     
     private func swipeAction(_ direction: SwipeResultDirection) {
-        overlayView?.overlayState = direction
-        overlayView?.alpha = 1.0
+//        overlayView?.overlayState = direction
+//        overlayView?.alpha = 1.0
         delegate?.card(self, wasSwipedIn: direction)
         let translationAnimation = POPBasicAnimation(propertyNamed: kPOPLayerTranslationXY)
         translationAnimation?.duration = cardSwipeActionAnimationDuration
@@ -369,6 +370,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             }
             else{
                 self.resetViewPositionAndTransformations(isRemove: false)
+                self.delegate?.card(rightSwipeAnimationCompleted: self)
             }
         }
         layer.pop_add(translationAnimation, forKey: "swipeTranslationAnimation")
@@ -390,6 +392,9 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             self.dragBegin = false
             if(isRemove){
                 self.removeFromSuperview()
+            }
+            else{
+//                self.delegate?.card(rightSwipeAnimationCompleted: self)
             }
         }
         
@@ -444,11 +449,11 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             
             layer.pop_add(swipeRotationAnimation, forKey: "swipeRotationAnimation")
             
-            overlayView?.overlayState = direction
-            let overlayAlphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
-            overlayAlphaAnimation?.toValue = 1.0
-            overlayAlphaAnimation?.duration = cardSwipeActionAnimationDuration
-            overlayView?.pop_add(overlayAlphaAnimation, forKey: "swipeOverlayAnimation")
+//            overlayView?.overlayState = direction
+//            let overlayAlphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+//            overlayAlphaAnimation?.toValue = 1.0
+//            overlayAlphaAnimation?.duration = cardSwipeActionAnimationDuration
+//            overlayView?.pop_add(overlayAlphaAnimation, forKey: "swipeOverlayAnimation")
         }
     }
 }

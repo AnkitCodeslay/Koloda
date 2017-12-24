@@ -28,10 +28,8 @@ class ExampleOverlayView: OverlayView {
             switch overlayState {
             case .left? :
                 overlayImageView.image = UIImage(named: overlayLeftImageName)
-                overlayImageView.image = nil
             case .right? :
                 overlayImageView.image = UIImage(named: overlayRightImageName)
-                overlayImageView.image = nil
             default:
                 overlayImageView.image = nil
             }

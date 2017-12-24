@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -61,42 +60,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYW-p3-aUa" customClass="KolodaView" customModule="Koloda">
-                                <rect key="frame" x="40" y="64" width="295" height="332"/>
+                                <rect key="frame" x="80" y="64" width="215" height="242"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gYW-p3-aUa" secondAttribute="height" multiplier="71:80" id="BQA-dc-G8d"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGY-ac-r3y">
-                                <rect key="frame" x="36" y="476" width="303" height="30"/>
-                                <state key="normal" title="Left"/>
-                                <connections>
-                                    <action selector="leftButtonTapped" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bqp-0O-YbW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j66-XN-zb1">
-                                <rect key="frame" x="36" y="526" width="303" height="30"/>
-                                <state key="normal" title="right"/>
-                                <connections>
-                                    <action selector="rightButtonTapped" destination="vXZ-lx-hvc" eventType="touchUpInside" id="VZh-4T-Ihd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490196078433" green="0.15294117647058825" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gYW-p3-aUa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="40" id="3hi-pX-z59"/>
+                            <constraint firstItem="gYW-p3-aUa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="80" id="3hi-pX-z59"/>
                             <constraint firstItem="gYW-p3-aUa" firstAttribute="top" secondItem="Mnc-Dd-Z3X" secondAttribute="bottom" id="9Fe-nn-0cM"/>
-                            <constraint firstItem="tGY-ac-r3y" firstAttribute="top" secondItem="gYW-p3-aUa" secondAttribute="bottom" constant="80" id="CxL-xm-ewj"/>
                             <constraint firstAttribute="trailing" secondItem="Mnc-Dd-Z3X" secondAttribute="trailing" id="El4-OJ-PK9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="j66-XN-zb1" secondAttribute="trailing" constant="20" id="Ihs-NY-QgC"/>
-                            <constraint firstAttribute="trailing" secondItem="gYW-p3-aUa" secondAttribute="trailing" constant="40" id="OcS-f2-rh2"/>
+                            <constraint firstAttribute="trailing" secondItem="gYW-p3-aUa" secondAttribute="trailing" constant="80" id="OcS-f2-rh2"/>
                             <constraint firstItem="Mnc-Dd-Z3X" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="QjZ-sZ-jkR"/>
                             <constraint firstItem="Mnc-Dd-Z3X" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="QkW-aP-z3z"/>
-                            <constraint firstItem="tGY-ac-r3y" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="TAI-Vn-8Zg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tGY-ac-r3y" secondAttribute="trailing" constant="20" id="leo-AG-Gwx"/>
-                            <constraint firstItem="j66-XN-zb1" firstAttribute="top" secondItem="tGY-ac-r3y" secondAttribute="bottom" constant="20" id="pYt-dV-db2"/>
                             <constraint firstItem="Mnc-Dd-Z3X" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="uQR-Gy-lTq"/>
-                            <constraint firstItem="j66-XN-zb1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="yTV-UO-BGr"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

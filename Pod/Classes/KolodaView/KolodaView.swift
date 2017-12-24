@@ -320,6 +320,10 @@ open class KolodaView: UIView, DraggableCardDelegate {
         delegate?.kolodaDidResetCard(self)
     }
     
+    func card(rightSwipeAnimationCompleted card: DraggableCardView) {
+        self.revertAction()
+    }
+    
     func card(cardWasTapped card: DraggableCardView) {
         guard let visibleIndex = visibleCards.index(of: card) else { return }
         
@@ -364,7 +368,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
             loadNextCard()
         }
         else{
-            revertAction()
+//            revertAction()
         }
         
         
@@ -387,6 +391,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
                 _self.delegate?.koloda(_self, didShowCardAt: _self.currentCardIndex)
             }
         } else {
+            
             animating = false
             delegate?.koloda(self, didSwipeCardAt: self.currentCardIndex - 1, in: direction)
             delegate?.kolodaDidRunOutOfCards(self)
@@ -474,6 +479,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
             addSubview(firstCardView)
             visibleCards.insert(firstCardView, at: 0)
             
+            
             animating = true
             animator.applyReverseAnimation(firstCardView, completion: { [weak self] _ in
                 guard let _self = self else {
@@ -481,10 +487,12 @@ open class KolodaView: UIView, DraggableCardDelegate {
                 }
                 
                 _self.animating = false
-                _self.delegate?.koloda(_self, didShowCardAt: _self.currentCardIndex)
+//                _self.delegate?.koloda(_self, didShowCardAt: _self.currentCardIndex)
                 })
+ 
+        self.delegate?.koloda(self, didShowCardAt: self.currentCardIndex)
         }
-        
+        return
         for (index, card) in visibleCards.dropFirst().enumerated() {
             if shouldTransparentizeNextCard {
                 card.alpha = alphaValueSemiTransparent
